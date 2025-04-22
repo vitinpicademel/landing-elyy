@@ -235,7 +235,6 @@ export default function Plantas() {
               <div className="line"></div>
             </div>
             <p className="lancamentos-descricao">
-              Conheça nossos empreendimentos exclusivos em localização privilegiada. 
               Projetos únicos que combinam sofisticação, conforto e qualidade de vida.
             </p>
           </div>
