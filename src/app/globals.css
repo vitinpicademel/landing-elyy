@@ -42,8 +42,9 @@ h1, h2, h3 {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: transparent;
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0.5rem 0;
   height: 70px;
 }
@@ -57,18 +58,13 @@ h1, h2, h3 {
 }
 
 .nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 2rem;
+  height: 100%;
 }
 
 .left-logo {
@@ -82,16 +78,16 @@ h1, h2, h3 {
 }
 
 .nav-links a {
-  color: #333;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 4px;
 }
 
 .nav-links a:hover {
-  color: #C5A47E;
+  color: var(--secondary-color);
   background-color: rgba(197, 164, 126, 0.1);
 }
 
@@ -114,13 +110,13 @@ h1, h2, h3 {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: var(--primary-color);
   padding: 0.5rem;
   transition: color 0.3s ease;
 }
 
 .menu-toggle:hover {
-  color: #C5A47E;
+  color: var(--secondary-color);
 }
 
 .overlay {
