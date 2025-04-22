@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Image from 'next/image'
+import Header from './components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,19 +32,19 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <Header />
         <header className="header">
           <div className="nav-container">
             <div className="left-logo">
-              <Image src="/logo.png" alt="Logo" width={50} height={50} />
+              <Image src="/logo.png" alt="Logo" width={40} height={40} priority />
             </div>
-            <button className="menu-toggle" onClick={toggleMenu}>
-              {isMenuOpen ? '✕' : '☰'}
-            </button>
             <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
               <a href="#lancamentos" onClick={closeMenu}>Lançamentos</a>
-              <a href="#sobre" onClick={closeMenu}>Sobre</a>
               <a href="https://wa.me/553433339576" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Contato</a>
             </nav>
+            <button className="menu-toggle" onClick={toggleMenu} aria-label="Menu">
+              {isMenuOpen ? '✕' : '☰'}
+            </button>
             <div className={`overlay ${isMenuOpen ? 'active' : ''}`} onClick={closeMenu}></div>
           </div>
         </header>
