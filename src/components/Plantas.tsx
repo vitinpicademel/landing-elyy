@@ -253,32 +253,56 @@ export default function Plantas() {
                     fill
                     style={{ objectFit: 'cover' }}
                     className="rounded-lg"
+                    priority
                   />
                   <div className="overlay" style={{
-                    background: empreendimento.id === 1 ? 
-                      'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%)' :
-                      'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8))'
+                    background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8))',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    zIndex: 1
                   }}>
-                    <div className="status-tag">{empreendimento.status}</div>
+                    <div className="status-tag" style={{ zIndex: 2 }}>{empreendimento.status}</div>
                     <div className="info-container" style={{
-                      marginTop: empreendimento.id === 1 ? 'auto' : '0'
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      padding: '2rem',
+                      zIndex: 2
                     }}>
-                      {empreendimento.id !== 1 && <h3>{empreendimento.nome}</h3>}
-                      <p className="localizacao">
+                      <h3 style={{ color: '#fff', marginBottom: '1rem' }}>{empreendimento.nome}</h3>
+                      <p className="localizacao" style={{ 
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        color: '#fff',
+                        marginBottom: '0.5rem'
+                      }}>
                         <FontAwesomeIcon icon={faMapMarkerAlt} />
                         {empreendimento.localizacao}
                       </p>
-                      <div className="area">
+                      <div className="area" style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        color: '#fff',
+                        marginBottom: '1rem'
+                      }}>
                         <FontAwesomeIcon icon={empreendimento.areaIcon} />
                         {empreendimento.area}
                       </div>
-                      <p className={`descricao ${expandedId === empreendimento.id ? 'expanded' : ''}`}>
+                      <p className={`descricao ${expandedId === empreendimento.id ? 'expanded' : ''}`}
+                         style={{ color: '#fff', marginBottom: '1rem' }}>
                         {empreendimento.descricao}
                       </p>
                       <div className="buttons-container">
                         <button 
                           className={`btn-ler-mais ${expandedId === empreendimento.id ? 'expanded' : ''}`}
                           onClick={(e) => toggleDescricao(e, empreendimento.id)}
+                          style={{ marginBottom: '0.5rem' }}
                         >
                           {expandedId === empreendimento.id ? 'Ler menos' : 'Ler mais'}
                           <FontAwesomeIcon 
