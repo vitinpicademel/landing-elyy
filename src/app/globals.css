@@ -100,16 +100,28 @@ h1, h2, h3 {
 }
 
 .nav-links a:last-child {
-  background-color: #25D366;
-  color: white;
+  background-color: transparent;
+  color: var(--light-color);
   padding: 0.5rem 1.5rem;
   border-radius: 25px;
   transition: all 0.3s ease;
+  border: 1px solid var(--light-color);
 }
 
 .nav-links a:last-child:hover {
-  background-color: #128C7E;
+  background-color: var(--light-color);
+  color: var(--primary-color);
   transform: translateY(-2px);
+}
+
+.header.scrolled .nav-links a:last-child {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.header.scrolled .nav-links a:last-child:hover {
+  background-color: var(--primary-color);
+  color: var(--light-color);
 }
 
 .menu-toggle {

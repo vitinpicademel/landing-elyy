@@ -29,7 +29,7 @@ export default function Header() {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <div className="left-logo">
-          <Image src="/logo.png" alt="Logo" width={40} height={40} priority />
+          <Image src="/images/logo.png" alt="Logo" width={40} height={40} priority />
         </div>
         <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
           <a href="#lancamentos" onClick={closeMenu}>Lançamentos</a>
