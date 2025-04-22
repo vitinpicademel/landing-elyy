@@ -251,58 +251,29 @@ export default function Plantas() {
                     src={empreendimento.imagem}
                     alt={empreendimento.nome}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'cover', zIndex: 1 }}
                     className="rounded-lg"
                     priority
                   />
-                  <div className="overlay" style={{
-                    background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8))',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    zIndex: 1
-                  }}>
-                    <div className="status-tag" style={{ zIndex: 2 }}>{empreendimento.status}</div>
-                    <div className="info-container" style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      padding: '2rem',
-                      zIndex: 2
-                    }}>
-                      <h3 style={{ color: '#fff', marginBottom: '1rem' }}>{empreendimento.nome}</h3>
-                      <p className="localizacao" style={{ 
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        color: '#fff',
-                        marginBottom: '0.5rem'
-                      }}>
+                  <div className="overlay">
+                    <div className="status-tag">{empreendimento.status}</div>
+                    <div className="info-container">
+                      <h3>{empreendimento.nome}</h3>
+                      <p className="localizacao">
                         <FontAwesomeIcon icon={faMapMarkerAlt} />
                         {empreendimento.localizacao}
                       </p>
-                      <div className="area" style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        color: '#fff',
-                        marginBottom: '1rem'
-                      }}>
+                      <div className="area">
                         <FontAwesomeIcon icon={empreendimento.areaIcon} />
                         {empreendimento.area}
                       </div>
-                      <p className={`descricao ${expandedId === empreendimento.id ? 'expanded' : ''}`}
-                         style={{ color: '#fff', marginBottom: '1rem' }}>
+                      <p className={`descricao ${expandedId === empreendimento.id ? 'expanded' : ''}`}>
                         {empreendimento.descricao}
                       </p>
                       <div className="buttons-container">
                         <button 
                           className={`btn-ler-mais ${expandedId === empreendimento.id ? 'expanded' : ''}`}
                           onClick={(e) => toggleDescricao(e, empreendimento.id)}
-                          style={{ marginBottom: '0.5rem' }}
                         >
                           {expandedId === empreendimento.id ? 'Ler menos' : 'Ler mais'}
                           <FontAwesomeIcon 

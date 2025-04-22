@@ -775,6 +775,7 @@ h1, h2, h3 {
   cursor: pointer;
   background-color: white;
   height: 600px;
+  width: 100%;
 }
 
 .lancamento-card:hover {
@@ -790,24 +791,17 @@ h1, h2, h3 {
 
 .lancamento-card .overlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
-  transition: all 0.3s ease;
-  z-index: 1;
-}
-
-.lancamento-card:hover .overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2) 0%,
     rgba(0, 0, 0, 0.6) 50%,
     rgba(0, 0, 0, 0.9) 100%
   );
+  z-index: 2;
 }
 
 .lancamento-card .status-tag {
@@ -820,7 +814,7 @@ h1, h2, h3 {
   border-radius: 30px;
   font-size: 1.1rem;
   font-weight: 700;
-  z-index: 2;
+  z-index: 3;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
@@ -834,7 +828,7 @@ h1, h2, h3 {
   right: 0;
   padding: 3rem;
   color: white;
-  z-index: 2;
+  z-index: 3;
   transform: translateY(0);
   transition: all 0.3s ease;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -845,7 +839,7 @@ h1, h2, h3 {
 
 .lancamento-card h3 {
   font-size: 2.4rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 700;
   font-family: 'Playfair Display', serif;
   letter-spacing: 0.5px;
@@ -877,7 +871,7 @@ h1, h2, h3 {
 .lancamento-card .area {
   font-size: 1.2rem;
   opacity: 1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -925,7 +919,7 @@ h1, h2, h3 {
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .btn-ler-mais {
