@@ -86,6 +86,7 @@ h1, h2, h3 {
   gap: 2rem;
   align-items: center;
   margin-right: 2rem;
+  z-index: 1001;
 }
 
 .nav-links a {
@@ -95,6 +96,7 @@ h1, h2, h3 {
   transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  position: relative;
 }
 
 .header.scrolled .nav-links a {
@@ -113,6 +115,7 @@ h1, h2, h3 {
   border-radius: 25px;
   transition: all 0.3s ease;
   border: 1px solid var(--light-color);
+  margin-left: 1rem;
 }
 
 .nav-links a:last-child:hover {
