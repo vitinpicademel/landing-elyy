@@ -21,6 +21,8 @@ interface Empreendimento {
 
 export default function Plantas() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const empreendimentos: Empreendimento[] = [
     {
@@ -44,11 +46,153 @@ export default function Plantas() {
       imagem: '/imagens/segundaqa.jpg',
       descricao: 'No coração da Represa de Jaguara, o Grand Hill está conectado aos principais pontos turísticos da região, e esse mapa exclusivo mostra como cada detalhe foi pensado para você viver o extraordinário!',
       link: 'https://grandhill.donnanegociacoes.com.br'
+    },
+    {
+      id: 3,
+      nome: 'Jockey Ville Residence',
+      status: 'Em Construção',
+      localizacao: 'Uberaba - MG',
+      area: 'Casas prontas a partir de 109 até 153m²',
+      areaIcon: faHome,
+      imagem: '/imagens/joc.jpg',
+      descricao: 'O Jockey Ville é a combinação perfeita de sofisticação, conforto e segurança com infraestrutura de clube completo. Um residencial exclusivo em Uberaba, projetado para quem busca qualidade de vida e um investimento seguro.',
+      link: '/lancamentos/jockey-ville'
+    },
+    {
+      id: 4,
+      nome: 'Villa Gávea',
+      status: 'Últimas Unidades',
+      localizacao: 'Uberaba - MG',
+      area: 'Apartamento com 73m²',
+      areaIcon: faBuilding,
+      imagem: '/imagens/villa.png',
+      descricao: 'Residencial no Villa Gávea (R$ 100.000 DE DESCONTO), descubra os benefícios, o conforto e a facilidade de morar em um local que oferece para você lazer, moradia e trabalho, tudo a menos de 5 minutos da sua casa!',
+      link: '/lancamentos/villa-gavea'
+    },
+    {
+      id: 5,
+      nome: 'Damha Fit 2',
+      status: 'Breve Lançamento',
+      localizacao: 'Uberaba - MG',
+      area: 'Lotes de 250m²',
+      areaIcon: faRulerCombined,
+      imagem: '/imagens/damha-fit/danha.jpeg',
+      descricao: 'Condomínio de alto padrão com infraestrutura moderna, segurança, lazer completo e selo Damha de qualidade. Seu novo lar em localização privilegiada.',
+      link: '/lancamentos/damha-fit-2'
+    },
+    {
+      id: 6,
+      nome: 'Jardins Jockey',
+      status: 'Em Lançamento',
+      localizacao: 'Uberaba - MG',
+      area: 'Lotes a partir de 264m²',
+      areaIcon: faRulerCombined,
+      imagem: '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0001.jpg',
+      descricao: 'Descubra o Jardins Jockey, um loteamento fechado com infraestrutura de resort, localizado na nova Avenida Ramid Mauad, ao lado do Jockey Club. Um empreendimento que une sofisticação, conforto e segurança para proporcionar momentos inesquecíveis com a sua família.',
+      link: '/lancamentos/jardins-jockey'
     }
   ];
 
+  const jockeyImages = [
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0001.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0002.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0003.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0004.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0005.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0006.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0007.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0008.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0009.jpg',
+    '/imagens/jockey-ville/Book Digital Jockey Ville_page-0010.jpg'
+  ];
+
+  const villaGaveaImages = [
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0001.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0002.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0003.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0004.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0005.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0006.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0007.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0008.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0009.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0010.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0011.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0012.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0013.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0014.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0015.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0016.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0017.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0018.jpg',
+    '/imagens/villa-gavea/BOOK DIGITAL_BRISA DA FONTE_page-0019.jpg'
+  ];
+
+  const jardinsJockeyImages = [
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0001.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0003.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0004.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0005.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0006.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0007.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0008.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0009.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0010.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0011.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0012.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0013.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0014.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0015.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0016.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0017.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0018.jpg',
+    '/imagens/jardins-jockey/Book Jardins Jockey - Cliente-1 (4)_page-0019.jpg'
+  ];
+
+  const damhaFitImages = [
+    '/imagens/damha-fit/danha.jpeg'
+  ];
+
+  const getImagesForEmpreendimento = (id: number) => {
+    switch (id) {
+      case 3:
+        return jockeyImages;
+      case 4:
+        return villaGaveaImages;
+      case 5:
+        return damhaFitImages;
+      case 6:
+        return jardinsJockeyImages;
+      default:
+        return [];
+    }
+  };
+
+  const [selectedEmpreendimento, setSelectedEmpreendimento] = useState<number | null>(null);
+
   const handleClick = (link: string, id: number) => {
-    window.open(link, '_blank');
+    if (id === 1 || id === 2) {
+      window.open(link, '_blank');
+    } else {
+      setSelectedEmpreendimento(id);
+      setShowModal(true);
+    }
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % getImagesForEmpreendimento(selectedEmpreendimento || 0).length);
+  };
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + getImagesForEmpreendimento(selectedEmpreendimento || 0).length) % getImagesForEmpreendimento(selectedEmpreendimento || 0).length);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setCurrentImageIndex(0);
+    setSelectedEmpreendimento(null);
   };
 
   const toggleDescricao = (e: React.MouseEvent, id: number) => {
@@ -134,6 +278,51 @@ export default function Plantas() {
           ))}
         </div>
       </div>
+
+      {showModal && selectedEmpreendimento && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>×</button>
+            <div className="carousel-container">
+              <div className="carousel-image">
+                <Image
+                  src={getImagesForEmpreendimento(selectedEmpreendimento)[currentImageIndex]}
+                  alt={`Imagem ${currentImageIndex + 1}`}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  priority
+                />
+              </div>
+              <button
+                className="carousel-button prev"
+                onClick={handlePrevImage}
+                aria-label="Imagem anterior"
+              >
+                ❮
+              </button>
+              <button
+                className="carousel-button next"
+                onClick={handleNextImage}
+                aria-label="Próxima imagem"
+              >
+                ❯
+              </button>
+              <div className="carousel-indicators">
+                {getImagesForEmpreendimento(selectedEmpreendimento).map((_, index) => (
+                  <button
+                    key={index}
+                    className={`carousel-indicator ${index === currentImageIndex ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentImageIndex(index);
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
