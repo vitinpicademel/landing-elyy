@@ -42,9 +42,8 @@ h1, h2, h3 {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  transition: all 0.3s ease;
   padding: 0.5rem 0;
   height: 70px;
 }
@@ -63,11 +62,12 @@ h1, h2, h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
   height: 100%;
 }
 
 .left-logo {
+  margin-left: 2rem;
   cursor: pointer;
 }
 
@@ -75,15 +75,20 @@ h1, h2, h3 {
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin-right: 2rem;
 }
 
 .nav-links a {
-  color: var(--primary-color);
+  color: var(--light-color);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+}
+
+.header.scrolled .nav-links a {
+  color: var(--primary-color);
 }
 
 .nav-links a:hover {
