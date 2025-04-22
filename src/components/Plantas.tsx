@@ -208,121 +208,102 @@ export default function Plantas() {
   };
 
   return (
-    <section id="lancamentos" className="lancamentos-section">
-      <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">Lançamentos Imobiliários</h2>
-          <div className="separator">
-            <div className="line"></div>
-            <div className="diamond">♦</div>
-            <div className="line"></div>
-          </div>
-          <p className="lancamentos-descricao">
-            Projetos únicos que combinam sofisticação, conforto e qualidade de vida.
-          </p>
-        </div>
-        <div className="lancamentos-grid">
-          {empreendimentos.map((empreendimento) => (
-            <div 
-              key={empreendimento.id} 
-              className="lancamento-card"
-              onClick={() => handleClick(empreendimento.link, empreendimento.id)}
-            >
-              <div className="lancamento-imagem">
-                <Image
-                  src={empreendimento.imagem}
-                  alt={empreendimento.nome}
-                  fill
-                  style={{ objectFit: 'cover', zIndex: 1 }}
-                  className="rounded-lg"
-                  priority
-                />
-                <div className="overlay">
-                  <div className="status-tag">{empreendimento.status}</div>
-                  <div className="info-container">
-                    <h3>{empreendimento.nome}</h3>
-                    <p className="localizacao">
-                      <FontAwesomeIcon icon={faMapMarkerAlt} />
-                      {empreendimento.localizacao}
-                    </p>
-                    <div className="area">
-                      <FontAwesomeIcon icon={empreendimento.areaIcon} />
-                      {empreendimento.area}
-                    </div>
-                    <p className={`descricao ${expandedId === empreendimento.id ? 'expanded' : ''}`}>
-                      {empreendimento.descricao}
-                    </p>
-                    <div className="buttons-container">
-                      <button 
-                        className={`btn-ler-mais ${expandedId === empreendimento.id ? 'expanded' : ''}`}
-                        onClick={(e) => toggleDescricao(e, empreendimento.id)}
-                      >
-                        {expandedId === empreendimento.id ? 'Ler menos' : 'Ler mais'}
-                        <FontAwesomeIcon 
-                          icon={faChevronDown} 
-                          className={`btn-icon ${expandedId === empreendimento.id ? 'expanded' : ''}`}
-                        />
-                      </button>
-                      <button
-                        className="btn-whatsapp-card"
-                        onClick={(e) => handleWhatsAppClick(e, empreendimento.nome)}
-                      >
-                        <FontAwesomeIcon icon={faWhatsapp} className="whatsapp-icon" />
-                        Falar com Corretor
-                      </button>
-                    </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {empreendimentos.map((empreendimento) => (
+          <div
+            key={empreendimento.id}
+            className="lancamento-card"
+            onClick={() => handleClick(empreendimento.link, empreendimento.id)}
+          >
+            <div className="lancamento-imagem">
+              <Image
+                src={empreendimento.imagem}
+                alt={empreendimento.nome}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={empreendimento.id <= 3}
+              />
+              <div className="status-tag">{empreendimento.status}</div>
+              <div className="overlay">
+                <div className="info-container">
+                  <h3>{empreendimento.nome}</h3>
+                  <div className="localizacao">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} />
+                    <span>{empreendimento.localizacao}</span>
+                  </div>
+                  <div className="area">
+                    <FontAwesomeIcon icon={empreendimento.areaIcon} />
+                    <span>{empreendimento.area}</span>
+                  </div>
+                  <div 
+                    className={`descricao ${expandedId === empreendimento.id ? 'expanded' : ''}`}
+                    onClick={(e) => toggleDescricao(e, empreendimento.id)}
+                  >
+                    {empreendimento.descricao}
+                    <FontAwesomeIcon 
+                      icon={faChevronDown} 
+                      className={`expand-icon ${expandedId === empreendimento.id ? 'expanded' : ''}`}
+                    />
+                  </div>
+                  <div className="buttons-container">
+                    <button
+                      className="whatsapp-button"
+                      onClick={(e) => handleWhatsAppClick(e, empreendimento.nome)}
+                    >
+                      <FontAwesomeIcon icon={faWhatsapp} />
+                      <span>Falar com Corretor</span>
+                    </button>
+                    <button className="saiba-mais-button">
+                      Ler mais
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
       {showModal && selectedEmpreendimento && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>×</button>
-            <div className="carousel-container">
-              <div className="carousel-image">
-                <Image
-                  src={getImagesForEmpreendimento(selectedEmpreendimento)[currentImageIndex]}
-                  alt={`Imagem ${currentImageIndex + 1}`}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  priority
-                />
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4" onClick={closeModal}>
+          <div className="relative w-full max-w-4xl bg-white rounded-lg overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="relative h-[80vh]">
+              <Image
+                src={getImagesForEmpreendimento(selectedEmpreendimento)[currentImageIndex]}
+                alt={`Imagem ${currentImageIndex + 1}`}
+                fill
+                style={{ objectFit: 'contain' }}
+                sizes="(max-width: 1536px) 100vw, 1536px"
+              />
+              <button
+                className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75"
+                onClick={closeModal}
+              >
+                ✕
+              </button>
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
+                <button
+                  className="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200"
+                  onClick={handlePrevImage}
+                >
+                  ←
+                </button>
+                <button
+                  className="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200"
+                  onClick={handleNextImage}
+                >
+                  →
+                </button>
               </div>
-              <button
-                className="carousel-button prev"
-                onClick={handlePrevImage}
-                aria-label="Imagem anterior"
-              >
-                ❮
-              </button>
-              <button
-                className="carousel-button next"
-                onClick={handleNextImage}
-                aria-label="Próxima imagem"
-              >
-                ❯
-              </button>
-              <div className="carousel-indicators">
-                {getImagesForEmpreendimento(selectedEmpreendimento).map((_, index) => (
-                  <button
-                    key={index}
-                    className={`carousel-indicator ${index === currentImageIndex ? 'active' : ''}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentImageIndex(index);
-                    }}
-                  />
-                ))}
+              <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full">
+                {currentImageIndex + 1} / {getImagesForEmpreendimento(selectedEmpreendimento).length}
               </div>
             </div>
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 }
